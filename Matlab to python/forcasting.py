@@ -67,7 +67,7 @@ plt.plot(ts,ys)
     
 #%% ACTUAL PREDICTION, WITH WEIGHTS
 N = len(ys)
-PH = 30 #prediction horizon
+PH = 20 #prediction horizon
 mu = 0.9
 
 tp_tot = np.zeros(N)
@@ -99,12 +99,18 @@ for i in range(1, N+1):
     tp_tot[i-1] = tp    
     yp_tot[i-1] = yp
 
-#plt.Figure()    
-plt.plot(tp_tot, yp_tot, '--', label='prediction') 
-plt.plot(ts, ys, label='original') 
-plt.legend()
-#plt.show()
 
+
+fig = plt.figure()
+fig.suptitle('Running line forecasting', fontsize=14, fontweight='bold')
+ax = fig.add_subplot(111)
+ax.set_title('mu = %g, PH=%g ' %(mu, PH))
+ax.plot(tp_tot, yp_tot, '--', label='prediction') 
+ax.plot(ts, ys, label='original') 
+ax.set_xlabel('time [min]')
+ax.set_ylabel('glucose (mg/dl)')
+ax.legend()
+    
     
 
     
